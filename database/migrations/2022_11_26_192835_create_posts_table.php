@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('content');
-            $table->boolean('private');
+            $table->boolean('private')->default(0);
             $table->foreignId('user_id')
                 ->constrained()
                 ->onDelete('cascade');
