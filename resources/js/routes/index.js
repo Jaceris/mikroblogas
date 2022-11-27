@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import PostsIndex from '../components/Posts/Index.vue'
 import PostsCreate from '../components/Posts/Create.vue'
 import PostsEdit from '../components/Posts/Edit.vue'
+import PostsShow from '../components/Posts/Show.vue'
 
 const routes = [
     { 
@@ -21,6 +22,12 @@ const routes = [
         name: 'posts.edit',
         component: PostsEdit,
         meta: { title: 'Edit post' }
+    },
+    {
+        path: '/posts/:id',
+        name: 'posts.show',
+        component: PostsShow,
+        meta: { title: 'Show post' }
     },
 ]
 export default createRouter({

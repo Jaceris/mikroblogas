@@ -25,4 +25,20 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeVisible($query)
+    {
+        $user = auth()->user();
+
+        return $query
+            ->where('private', false)
+            ->when($user, function($query) use ($user) {
+                $query->orWhere('user_id', $user->id);
+            });
+    }
+
+    public function scopeByUserId($query, int $userId)
+    {
+        return $query->visible()->where('user_id', $userId);
+    }
 }

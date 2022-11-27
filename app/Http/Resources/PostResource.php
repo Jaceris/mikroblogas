@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -22,6 +21,7 @@ class PostResource extends JsonResource
             'user_id' => $this->user_id,
             'user_name' => $this->user->name,
             'created_at' => $this->created_at->format('Y-m-d'),
+            'comments' => CommentResource::collection($this->whenLoaded('comments')),
         ];
     }
 }

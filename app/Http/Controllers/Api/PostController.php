@@ -10,7 +10,11 @@ use App\Models\Post;
 class PostController extends Controller
 {
     public function index () {
-        return PostResource::collection(Post::with('user:id,name')->orderBy('created_at', 'desc')->get());
+        return PostResource::collection(
+            Post::with('user:id,name')
+                ->visible()
+                ->orderBy('created_at', 'desc')
+                ->get());
     }
 
     public function store(PostRequest $request)
@@ -22,11 +26,15 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        $this->authorize('access', $post);
+
         return new PostResource($post);
     }
 
     public function update(Post $post, PostRequest $request)
     {
+        $this->authorize('access', $post);
+
         $post->update($request->validated());
 
         return new PostResource($post);

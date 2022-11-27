@@ -51,6 +51,13 @@ export default function usePosts() {
         axios.get('/api/posts/' + id)
             .then(response => {
                 post.value = response.data.data;
+            }).catch(error => {
+                router.push({ name: 'posts.index' })
+
+                swal({
+                    icon: 'error',
+                    title: 'You cant access this post'
+                })
             })
     }
 

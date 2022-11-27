@@ -20,7 +20,7 @@ class CommentResource extends JsonResource
             'content' => $this->content,
             'post_id' => $this->post_id,
             'user_id' => $this->user_id,
-            'user_full_name' => User::find($this->user_id)->fullName ?? '',
+            'user_name' => $this->user->name,
             'created_at' => $this->created_at->format('Y-m-d'),
         ];
     }
