@@ -7,6 +7,7 @@
             <span>
                 <time :datetime="post.datetime" class="mr-2">{{ post.created_at }}</time> 
                 <a class="">{{ post.user_name }}</a>
+                <router-link :to="{ name: 'posts.edit', params: { id: post.id } }" class="mr-2">Edit</router-link>
             </span>
           </p>
           <a href="#" class="mt-2 block">

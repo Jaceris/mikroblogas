@@ -1,5 +1,5 @@
 <template>
-    <form class="max-w-2xl" @submit.prevent="storePost(post)">
+    <form class="max-w-2xl" @submit.prevent="updatePost(post)">
         <!-- Title -->
         <div>
             <label for="title" class="block font-medium text-sm text-gray-700">
@@ -44,7 +44,7 @@
             <button :disabled="isLoading" class="inline-flex items-center px-3 py-2 bg-blue-600 text-white rounded disabled:opacity-75 disabled:cursor-not-allowed">
                 <div v-show="isLoading" class="inline-block animate-spin w-4 h-4 mr-2 border-t-2 border-t-white border-r-2 border-r-white border-b-2 border-b-white border-l-2 border-l-blue-600 rounded-full"></div>
                 <span v-if="isLoading">Processing...</span>
-                <span v-else>Create</span>
+                <span v-else>Update</span>
             </button>
         </div>
     </form>
@@ -52,16 +52,16 @@
 
 <script setup>
 
-import {reactive } from "vue";
+import {reactive, onMounted } from "vue";
 import usePosts from "../../composables/posts";
+import { useRoute } from "vue-router";
+       
+const { post, getPost, updatePost, validationErrors, isLoading } = usePosts()
 
-const post = reactive({
-    title: '',
-    content: '',
-    private: false,
-    user_id: 1,
+const route = useRoute()
+
+onMounted(() => {
+    getPost(route.params.id)
 })
-        
-const { storePost, validationErrors, isLoading } = usePosts()
      
 </script>
