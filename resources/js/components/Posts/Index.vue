@@ -6,7 +6,7 @@
           <p class="text-sm text-gray-500">
             <span>
                 <time :datetime="post.datetime" class="mr-2">{{ post.created_at }}</time> 
-                <a class="gap-px">{{ post.user_full_name }}</a>
+                <a class="">{{ post.user_name }}</a>
             </span>
           </p>
           <a href="#" class="mt-2 block">
