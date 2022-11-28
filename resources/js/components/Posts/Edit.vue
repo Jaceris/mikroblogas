@@ -31,7 +31,7 @@
             <label for="private" class="block font-medium text-sm text-gray-700">
                 Private
             </label>
-            <input v-model="post.private" id="private" name="private" type="checkbox" class="block mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+            <input v-model="post.private" id="private" name="private" type="checkbox" class="block mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" :checked="post.private" />
             <div class="text-red-600 mt-1">
                 <div v-for="(message, index) in validationErrors?.private" :key="index" >
                     {{ message }}

@@ -10,12 +10,12 @@
         <p>{{ post.content }}</p>
       </div>
     </div>
-    <div class="relative px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-prose text-lg">
-        <h4>
-          <span class="mt-8 block text-center text-2xl font-bold leading-8 tracking-tight text-gray-900 sm:text-2xl">Comments</span>
-        </h4>
+    <div class="relative mt-8 mb-8">
+      <div class="absolute inset-0 flex items-center" aria-hidden="true">
+        <div class="w-full border-t border-gray-300" />
       </div>
+    </div>
+    <div class="relative px-4 mt-16 sm:px-6 lg:px-8">
       <div v-for="(comment, index) in post.comments" :key="index" class="prose prose-lg prose-indigo mx-auto mt-6 text-gray-500">
         <p class="text-sm text-gray-900">
             <span>
@@ -39,7 +39,7 @@
         </div>
         
         <!-- Buttons -->
-        <div class="mt-4">
+        <div v-if="userId" class="mt-4">
           <button :disabled="isLoading" class="inline-flex items-center px-3 py-2 bg-blue-600 text-white rounded disabled:opacity-75 disabled:cursor-not-allowed">
             <div v-show="isLoading" class="inline-block animate-spin w-4 h-4 mr-2 border-t-2 border-t-white border-r-2 border-r-white border-b-2 border-b-white border-l-2 border-l-blue-600 rounded-full"></div>
               <span v-if="isLoading">Processing...</span>
@@ -53,7 +53,7 @@
 
 <script setup>
 
-import {reactive, onMounted } from "vue";
+import {reactive, onMounted, inject } from "vue";
 import usePosts from "../../composables/posts";
 import useComments from "../../composables/comments";
 import { useRoute } from "vue-router";
@@ -64,9 +64,11 @@ const { storeComment, validationErrors, isLoading } = useComments()
 
 const route = useRoute()
 
+const userId = inject('authId')
+
 const comment = reactive({
     content: '',
-    user_id: 1,
+    user_id: userId,
     post_id: route.params.id,
 })
 

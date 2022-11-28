@@ -26,14 +26,14 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        $this->authorize('access', $post);
+        $this->authorize('canView', $post);
 
         return new PostResource($post->load('comments'));
     }
 
     public function update(Post $post, PostRequest $request)
     {
-        $this->authorize('access', $post);
+        $this->authorize('canManage', $post);
 
         $post->update($request->validated());
 

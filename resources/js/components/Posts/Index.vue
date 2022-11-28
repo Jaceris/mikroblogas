@@ -8,6 +8,7 @@
                 <time :datetime="post.datetime" class="mr-1">{{ post.created_at }}</time> 
                 {{ post.user_name }}
                 <router-link 
+                  v-if="userId == post.user_id"
                   :to="{ name: 'posts.edit', params: { id: post.id } }" 
                   class="mr-1 font-semibold text-indigo-600 hover:text-indigo-500">
                   Edit
@@ -34,10 +35,12 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, inject } from 'vue'
 import usePosts from '../../composables/posts'
 
 const { posts, getPosts } = usePosts()
+
+const userId = inject('authId')
 
 onMounted(() => {
   getPosts()

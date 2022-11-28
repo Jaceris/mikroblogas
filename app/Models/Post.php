@@ -28,17 +28,23 @@ class Post extends Model
 
     public function scopeVisible($query)
     {
-        $user = auth()->user();
+        // fake auth()
+        $userId = env('VITE_USER_ID');
 
         return $query
             ->where('private', false)
-            ->when($user, function($query) use ($user) {
-                $query->orWhere('user_id', $user->id);
+            ->when($userId, function($query) use ($userId) {
+                $query->orWhere('user_id', $userId);
             });
+    }
+
+    public function scopeVisibleForPublic($query)
+    {
+        return $query->where('private', false); 
     }
 
     public function scopeByUserId($query, int $userId)
     {
-        return $query->visible()->where('user_id', $userId);
+        return $query->visibleForPublic()->where('user_id', $userId);
     }
 }

@@ -52,14 +52,16 @@
 
 <script setup>
 
-import {reactive } from "vue";
+import {reactive, inject } from "vue";
 import usePosts from "../../composables/posts";
+
+const userId = inject('authId')
 
 const post = reactive({
     title: '',
     content: '',
     private: false,
-    user_id: 1,
+    user_id: userId,
 })
         
 const { storePost, validationErrors, isLoading } = usePosts()

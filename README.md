@@ -13,3 +13,9 @@ php artisan db:seed
 http://localhost:8000/api/get-posts
 http://localhost:8000/api/get-posts-by-user/{user_id}
 http://localhost:8000/api/get-posts-post-with-comments/{post}
+
+## Auth
+
+authentification is immitated by changing
+
+VITE_USER_ID in .env

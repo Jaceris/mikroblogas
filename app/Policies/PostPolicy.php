@@ -11,10 +11,30 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
-    public function access(?User $user, Post $post)
+    public function canView(?User $user, Post $post)
     {
-        return ! $post->private || optional($user)->id === $post->user_id
+        // fake auth()
+        $userId = env('VITE_USER_ID');
+
+        return ! $post->private || $userId == $post->user_id
+            ? Response::allow()
+            : Response::deny('Post is private.');
+    }
+
+    public function canManage(?User $user, Post $post)
+    {
+        // fake auth()
+        $userId = env('VITE_USER_ID');
+
+        return $userId == $post->user_id
             ? Response::allow()
             : Response::deny('You do not own this post.');
-    }   
+    }
+
+    public function canGetIfNotPrivate(?User $user, Post $post)
+    {
+        return ! $post->private
+            ? Response::allow()
+            : Response::deny('Post is private.');
+    }
 }

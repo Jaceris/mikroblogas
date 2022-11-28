@@ -12,7 +12,7 @@ class PostController extends Controller
     {
         return PostResource::collection(
             Post::with('user:id,name')
-                ->visible()
+                ->visibleForPublic()
                 ->get());
     }
 
@@ -26,7 +26,7 @@ class PostController extends Controller
 
     public function getSingleWithComments(Post $post) 
     {
-        $this->authorize('access', $post);
+        $this->authorize('canGetIfNotPrivate', $post);
        
         return new PostResource($post->load(['comments']));
     }
