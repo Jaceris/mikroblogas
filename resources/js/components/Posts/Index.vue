@@ -19,7 +19,7 @@
               class="mt-2 block text-xl font-semibold text-gray-900 hover:text-gray-500">
               {{ post.title }}
           </router-link>
-          <p class="mt-3 text-base text-gray-500">{{ post.content }}</p>
+          <p class="mt-3 text-base text-gray-500">{{ post.excerpt }}</p>
           <div class="mt-3">
             <router-link 
               :to="{ name: 'posts.show', params: { id: post.id } }" 

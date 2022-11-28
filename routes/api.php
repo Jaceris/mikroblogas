@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::apiResource('posts', \App\Http\Controllers\Api\PostController::class);
+Route::apiResource('comments', \App\Http\Controllers\Api\CommentController::class);
 
 Route::get('public/posts', [\App\Http\Controllers\API\public\PostController::class, 'index']);
 Route::get('public/posts-by-user/{user_id}', [\App\Http\Controllers\API\public\PostController::class, 'getByUserId']);

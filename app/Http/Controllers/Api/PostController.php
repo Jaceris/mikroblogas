@@ -28,7 +28,7 @@ class PostController extends Controller
     {
         $this->authorize('access', $post);
 
-        return new PostResource($post);
+        return new PostResource($post->load('comments'));
     }
 
     public function update(Post $post, PostRequest $request)
