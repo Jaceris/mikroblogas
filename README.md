@@ -1,12 +1,16 @@
 ## Installation
 
 copy .env.example to .env
-php artisan key:generate
-create DB mikroblogas
-npm install
 composer install
+npm install
+php artisan key:generate
+
+create DB with name mikroblogas and run:
 php artisan migrate
 php artisan db:seed
+
+php artisan serve
+npm run dev
 
 ## 3rd party API routes
 
